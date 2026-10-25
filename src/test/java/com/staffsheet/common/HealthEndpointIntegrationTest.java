@@ -27,5 +27,13 @@ class HealthEndpointIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("UP"));
     }
+
+    @Test
+    @DisplayName("OpenAPI docs should be publicly accessible for Swagger UI")
+    void openApiDocsShouldBePubliclyAccessible() throws Exception {
+        mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.info.title").value("StaffSheet API"));
+    }
 }
 

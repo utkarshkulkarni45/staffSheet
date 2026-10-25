@@ -15,6 +15,7 @@ spring:
 
 app:
   jwt:
-    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    # base64 of "test-only-staffsheet-key-not-a-production-secret" — not a real secret
+    secret: dGVzdC1vbmx5LXN0YWZmc2hlZXQta2V5LW5vdC1hLXByb2R1Y3Rpb24tc2VjcmV0
     expiration-ms: 86400000
 

@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: ${DB_NAME:-staffsheet}
       POSTGRES_USER: ${DB_USERNAME:-staffsheet}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-staffsheet_secret}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env (copy .env.example)}
     ports:
       - "${DB_PORT:-5432}:5432"
     volumes:

@@ -2,7 +2,9 @@ spring:
   application:
     name: staffsheet
   profiles:
-    active: dev
+    default: dev
+  config:
+    import: optional:file:./.env[.properties]
 
 server:
   port: ${SERVER_PORT:8080}
