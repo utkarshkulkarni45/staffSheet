@@ -12,6 +12,7 @@ import com.staffsheet.employee.entity.Employee;
 import com.staffsheet.employee.entity.Role;
 import com.staffsheet.employee.mapper.EmployeeMapper;
 import com.staffsheet.employee.repository.EmployeeRepository;
+import com.staffsheet.leave.service.LeaveBalanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,6 +35,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
     private final PasswordEncoder passwordEncoder;
+    private final LeaveBalanceService leaveBalanceService;
 
     @Transactional
     public EmployeeResponse createEmployee(CreateEmployeeRequest request) {
@@ -50,6 +53,7 @@ public class EmployeeService {
         }
 
         Employee saved = employeeRepository.save(employee);
+        leaveBalanceService.initializeBalancesForEmployee(saved, Year.now().getValue());
         return employeeMapper.toResponse(saved);
     }
 

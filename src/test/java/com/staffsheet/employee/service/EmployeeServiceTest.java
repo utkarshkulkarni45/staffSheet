@@ -9,6 +9,7 @@ import com.staffsheet.employee.entity.Employee;
 import com.staffsheet.employee.entity.Role;
 import com.staffsheet.employee.mapper.EmployeeMapper;
 import com.staffsheet.employee.repository.EmployeeRepository;
+import com.staffsheet.leave.service.LeaveBalanceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,6 +40,9 @@ class EmployeeServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private LeaveBalanceService leaveBalanceService;
 
     @InjectMocks
     private EmployeeService employeeService;
@@ -102,6 +107,7 @@ class EmployeeServiceTest {
         assertThat(response).isNotNull();
         assertThat(response.email()).isEqualTo("alice@staffsheet.com");
         verify(employeeRepository).save(any(Employee.class));
+        verify(leaveBalanceService).initializeBalancesForEmployee(any(Employee.class), anyInt());
     }
 
     @Test
