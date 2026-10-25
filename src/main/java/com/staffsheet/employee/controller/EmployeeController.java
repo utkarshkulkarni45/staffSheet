@@ -73,5 +73,26 @@ public class EmployeeController {
             @RequestBody AssignManagerRequest request) {
         return ResponseEntity.ok(employeeService.assignManager(id, request));
     }
+
+    @GetMapping("/{id}/reports")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Get direct reports", description = "Returns immediate direct reports for a manager")
+    public ResponseEntity<java.util.List<EmployeeResponse>> getDirectReports(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getDirectReports(id));
+    }
+
+    @GetMapping("/{id}/chain")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Get upward management chain", description = "Returns reporting chain upward from employee to top executive")
+    public ResponseEntity<java.util.List<com.staffsheet.employee.dto.HierarchyFlatResponse>> getUpwardChain(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getUpwardChain(id));
+    }
+
+    @GetMapping("/{id}/subtree")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Get reporting subtree", description = "Returns full downward hierarchy tree rooted at given manager")
+    public ResponseEntity<com.staffsheet.employee.dto.HierarchyNodeResponse> getReportingSubtree(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getReportingSubtree(id));
+    }
 }
 
