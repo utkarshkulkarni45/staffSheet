@@ -1,0 +1,42 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/nbactions.xml
+/nb-configuration.xml
+%USERPROFILE%AppDataLocalNetBeansCache
+
+### VS Code ###
+.vscode/
+
+### Secrets and Environment ###
+.env
+*.env
+*.log
+
+### AI agent instructions / metadata (per user requirement) ###
+.ai/
+agent.md
+
